@@ -83,7 +83,7 @@ to the repo via email to `binhdv@thenowproject.com.vn` and
 
 ## Checklist
 
-  - [1] Finish Question 1
+  - [ok] Finish Question 1
   - [1] Finish Question 2
   - [1] Finish Question 3
   - [1] Finish Question 4
