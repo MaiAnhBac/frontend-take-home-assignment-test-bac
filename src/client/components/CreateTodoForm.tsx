@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { api } from '@/utils/client/api'
-
 /**
  * QUESTION 1:
  * -----------
@@ -25,7 +24,16 @@ import { api } from '@/utils/client/api'
 
 export const CreateTodoForm = () => {
   const [todoBody, setTodoBody] = useState('')
-
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      console.error('Cannot press Enter');
+      // You can also add logic here to handle the Enter key press
+    }
+  };
   const apiContext = api.useContext()
 
   const { mutate: createTodo, isLoading: isCreatingTodo } =
@@ -36,7 +44,10 @@ export const CreateTodoForm = () => {
     })
 
   return (
-    <form className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400">
+    <form
+      onSubmit={handleSubmit}
+      className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400"
+    >
       <label htmlFor={TODO_INPUT_ID} className="sr-only">
         Add todo
       </label>
@@ -49,6 +60,7 @@ export const CreateTodoForm = () => {
         onChange={(e) => {
           setTodoBody(e.target.value)
         }}
+        onKeyDown={handleKeyDown}
         className="flex-1 px-4 text-base placeholder:text-gray-400 focus:outline-none"
       />
 
@@ -61,6 +73,7 @@ export const CreateTodoForm = () => {
           })
           setTodoBody('')
         }}
+        className="rounded-full bg-gray-700 pb-2 pl-5 pr-5 pt-2 text-white"
       >
         Add
       </button>
